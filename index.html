@@ -1,0 +1,73 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Diabetes Prediction</h2>
+        <form id="predictionForm" class="mt-4">
+            <div class="form-group">
+                <label>Pregnancies</label>
+                <input type="number" id="Pregnancies" class="form-control" required>
+            </div>
+            <!-- Add other fields similarly for Glucose, BloodPressure, etc. -->
+         <!--  <button type="button" onclick="makePrediction()" class="btn btn-primary">Predict</button>
+        </form>
+        <div class="mt-4" id="result"></div>
+    </div>
+
+    <script>
+        async function makePrediction() {
+            const data = {
+                Pregnancies: document.getElementById("Pregnancies").value,
+                Glucose: document.getElementById("Glucose").value,
+                BloodPressure: document.getElementById("BloodPressure").value,
+                SkinThickness: document.getElementById("SkinThickness").value,
+                Insulin: document.getElementById("Insulin").value,
+                BMI: document.getElementById("BMI").value,
+                DiabetesPedigreeFunction: document.getElementById("DiabetesPedigreeFunction").value,
+                Age: document.getElementById("Age").value
+            };
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            document.getElementById("result").innerHTML = `<h4>Prediction: ${result.prediction}</h4>`;
+        }
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Prediction</title>
+</head>
+<body>
+    <h2>Diabetes Prediction Form</h2>
+    <form action="/predict" method="post">
+        <label>Pregnancies:</label><input type="number" name="pregnancies"><br>
+        <label>Glucose:</label><input type="number" name="glucose"><br>
+        <label>Blood Pressure:</label><input type="number" name="bloodpressure"><br>
+        <label>Skin Thickness:</label><input type="number" name="skinthickness"><br>
+        <label>Insulin:</label><input type="number" name="insulin"><br>
+        <label>BMI:</label><input type="number" step="0.01" name="bmi"><br>
+        <label>Diabetes Pedigree Function:</label><input type="number" step="0.01" name="dpf"><br>
+        <label>Age:</label><input type="number" name="age"><br>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction_text %}
+        <h3>{{ prediction_text }}</h3>
+    {% endif %}
+</body>
+</html>
